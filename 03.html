@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>网页换肤</title>
+        <style>
+            
+           *{
+	            padding: 0;
+	            margin : 0;
+            }
+            div{
+	            display: block;
+            }
+            ul,li{
+	            list-style: none;
+            } 
+            .box{
+                width: 600px;
+                height: 400px;
+                margin: 0 auto;
+            }
+            .color{
+                width: 500px;
+                height: 50px;
+                border: gray solid 2px;
+                margin: 50px auto;
+                
+            }
+            li{
+                width: 25px;
+                height: 30px;
+                margin: 15px 5px 0 15px;
+                line-height: 30px;
+                float: left;
+            }
+            #background{
+                width: 450px;
+                height: 150px;
+                margin: 0 auto;
+                font-size: 25px;
+                line-height: 40px;
+                background-color :green;
+            }
+            #div1{
+                width: 30px;
+                height: 15px;
+                line-height: 15px;
+                font-size: 12px;
+                border:1px gray solid;
+                background-color: white;
+                position: fixed;
+                text-align: center;
+                color: gray;
+            }
+        </style>
+    </head>
+    <body>
+        <fieldset class="box">
+            <legend style="color: red; font-size: 30px;">网页换肤</legend>
+            <ul class="color">
+                    <li style="background-color:green;"></li>
+                    <li style="background-color:purple;"></li>
+                    <li style="background-color: blue;"></li>
+                    <li style="background-color:  pink;"></li>
+                    <li style="background-color:red;"></li>
+                    <li style="background-color:yellow;"></li>
+            </ul>
+            <div id="background">
+                <p>localStorage将数据保存在客户…………</p>
+            </div>
+        </fieldset>
+    </body>
+    <script>
+        var background=document.getElementById("background");
+        var colors=document.getElementsByTagName("li");
+        window.onload=function(){
+            if(localStorage.getItem("keyColor")===null){
+                colors[0].style.marginTop=5+"px";
+                background.style.backgroundColor=colors[0].style.backgroundColor;
+            }
+            else{
+                background.style.backgroundColor=localStorage.getItem("keyColor");
+            }
+        }
+        for(var i=0;i<colors.length;i++){
+            if(localStorage.getItem("keyColor")===colors[i].style.backgroundColor){
+                colors[i].style.marginTop= 5 +"px";
+            }
+        }
+        var colors1=["绿色","紫色","蓝色","粉色","红色","黄色"];
+        for(var i=0;i<colors.length;i++){
+            colors[i].setColor=colors1[i];
+            colors[i].onmouseover=function(m){
+                var div1=document.createElement("div");
+                div1.id="div1";
+                div1.innerHTML=this.setColor;
+                div1.style.left=m.clientX+10+"px";
+                div1.style.top=m.clientX+10+"px";
+                document.body.appendChild(div1);
+            }
+            colors[i].onmousmove=function(m){
+                var div1=document.getElementById("div1");
+                div1.style.left=m.clientX+10+"px";
+                div1.style.top=m.clientX+10+"px";
+            }
+            colors[i].onmouseout=function(){
+                var div1=document.getElementById("div1");
+                document.body.removeChild(div1);
+            }
+            colors[i].onclick=function(){
+                for(var j=0;j<colors.length;j++){
+                    colors[i].style.marginTop = 15+"px";
+                }
+                this.style.marginTop=5+"px";
+                localStorage.setItem("keyColor",this.style.backgroundColor);
+                background.style.backgroundColor=localStorage.getItem("keyColor");
+            }
+        }
+    </script>
+</html>
