@@ -99,13 +99,13 @@
                 div1.id="div1";
                 div1.innerHTML=this.setColor;
                 div1.style.left=m.clientX+10+"px";
-                div1.style.top=m.clientX+10+"px";
+                div1.style.top=m.clientY+10+"px";
                 document.body.appendChild(div1);
             }
             colors[i].onmousmove=function(m){
                 var div1=document.getElementById("div1");
                 div1.style.left=m.clientX+10+"px";
-                div1.style.top=m.clientX+10+"px";
+                div1.style.top=m.clientY+10+"px";
             }
             colors[i].onmouseout=function(){
                 var div1=document.getElementById("div1");
